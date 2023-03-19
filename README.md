@@ -94,5 +94,5 @@ ATTRIBUTES DETAILS :
               
 CONCLUSION:
 
-    Column-family databases are a powerful tool in the world of data management, 
+  Column-family databases are a powerful tool in the world of data management, 
   and their popularity is only expected to grow as organizations continue to generate and collect more and more data.
