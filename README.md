@@ -84,7 +84,7 @@ ATTRIBUTES DETAILS :
               ->orderid 
               ->paymenttype represents online payment including gpay,paytm and cash on delivery as cod.
               
-    The"administrator"table contains the informations about the persons who manages the ordering system of the restaurant.
+    The"administrator"table contains informations about the persons who manages the ordering system of the restaurant.
     The following are the attributes in the administrator table:
     
               ->adminid represents administrator id.
