@@ -21,7 +21,9 @@ KEY VALUE TO COLUMN-FAMILY:
 OPERATIONS:
 
 -> Created a KEYSPACE called "hotel".
+
 -> Cassandra CRUD operations stands for Create,Read,Update and Delete or Drop.
+
 -> To create a table,the following syntax is used:
         
        CREATE TABLE <tablename> (attribute1 attributetype,attribute2 atrributetype,.......,atrributeN attributetype);
@@ -82,8 +84,7 @@ ATTRIBUTES DETAILS :
               ->orderid 
               ->paymenttype represents online payment including gpay,paytm and cash on delivery as cod.
               
-    The "administrator" table contains the informations about the persons who manages the 
-ordering system of the restaurant.The following are the attributes in the administrator table:
+    The "administrator" table contains the informations about the persons who manages the ordering system of the restaurant.The following are the attributes in the administrator table:
     
               ->adminid represents administrator id.
               ->name represents administrator name.
