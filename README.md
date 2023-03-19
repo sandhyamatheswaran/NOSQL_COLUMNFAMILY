@@ -1,15 +1,15 @@
 
 # RESTAURANT  FOOD ORDERING SYSTEM :
          Restaurant food ordering system is used to automate menu for ordering food in restaurants . In these modern days the number of restaurants are increasing. They also require very fast processing for serving food to the customers. With the increasing number of customers, it would require more man power, since the current situation has become hectic for the restaurants. Also changes in the hardcopy of the menu can’t happen . For these problem ,restaurant food ordering system was proposed.
-# CASANDRA:
+CASANDRA:
       Cassandra is a column-family database that stores data in rows with column families. 
       Cassandra provides tunable consistencythat allows to balance consistency and availability.
-# KEY VALUE TO COLUMN-FAMILY:
+KEY VALUE TO COLUMN-FAMILY:
     To convert the REDIS KEY VALUE database into a CASSANDRA COLUMN FAMILY database,
             STEP-1:Create a keyspace in Cassandra to store the data.
             STEP-2:Create column families to store the data.
             STEP-3:Insert the data into the column families.
-# OPERATIONS:
+OPERATIONS:
         -> Created a KEYSPACE called "hotel".
         -> Cassandra CRUD operations stands for Create,Read,Update and Delete or Drop.
         -> To create a table,the following syntax is used:
@@ -22,7 +22,7 @@
                 DELETE FROM <tablename> WHERE <condition>;
         -> "describe" command is used to provide the information about the connected Cassandra cluster and objects within the cluster.
                 describe <tablename>;
-# ATTRIBUTES DETAILS :
+ATTRIBUTES DETAILS :
        For Restaurant food ordering system,it contains six tables named,
              1.customer
              2.order 
