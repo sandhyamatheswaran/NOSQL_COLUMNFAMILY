@@ -1,0 +1,292 @@
+cqlsh> CREATE KEYSPACE hotel WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
+cqlsh> use hotel;
+cqlsh:hotel> CREATE TABLE customer(custid varchar PRIMARY KEY,custname text,email text);
+cqlsh:hotel> describe customer;
+
+CREATE TABLE hotel.customer (
+    custid text PRIMARY KEY,
+    custname text,
+    email text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:hotel> INSERT INTO customer(custid,custname,email)VALUES('100','sri','erode');
+cqlsh:hotel> INSERT INTO customer(custid,custname,email)VALUES('101','sandy','perundurai');
+cqlsh:hotel> INSERT INTO customer(custid,custname,email)VALUES('102','sound','salem');
+cqlsh:hotel> INSERT INTO customer(custid,custname,email)VALUES('103','devi','thirupur');
+cqlsh:hotel> SELECT*FROM customer;
+
+ custid | custname | email
+--------+----------+------------
+    103 |     devi |   thirupur
+    102 |    sound |      salem
+    100 |      sri |      erode
+    101 |    sandy | perundurai
+
+(4 rows)
+
+cqlsh:hotel> CREATE TABLE orders(orderid varchar PRIMARY KEY,custid varchar,quantity varchar);
+
+cqlsh:hotel> describe orders;
+
+CREATE TABLE hotel.orders (
+    orderid text PRIMARY KEY,
+    custid text,
+    quantity text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:hotel> INSERT INTO orders(orderid,custid,quantity)VALUES('201','100','2');
+cqlsh:hotel> INSERT INTO orders(orderid,custid,quantity)VALUES('202','101','1');
+cqlsh:hotel> INSERT INTO orders(orderid,custid,quantity)VALUES('203','102','3');
+cqlsh:hotel> INSERT INTO orders(orderid,custid,quantity)VALUES('204','103','2');
+cqlsh:hotel> SELECT*FROM orders;
+
+ orderid | custid | quantity
+---------+--------+----------
+     202 |    101 |        1
+     204 |    103 |        2
+     201 |    100 |        2
+     203 |    102 |        3
+
+(4 rows)
+
+cqlsh:hotel> CREATE TABLE menu(menuid varchar PRIMARY KEY,foodid varchar);
+cqlsh:hotel> describe menu;
+
+CREATE TABLE hotel.menu (
+    menuid text PRIMARY KEY,
+    foodid text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:hotel> INSERT INTO menu(menuid,foodid)VALUES('1','san11');
+cqlsh:hotel> INSERT INTO menu(menuid,foodid)VALUES('2','veg22');
+cqlsh:hotel> INSERT INTO menu(menuid,foodid)VALUES('3','dor33');
+cqlsh:hotel> INSERT INTO menu(menuid,foodid)VALUES('4','jui89');
+cqlsh:hotel> SELECT * FROM menu;
+
+ menuid | foodid
+--------+--------
+      4 |  jui89
+      3 |  dor33
+      2 |  veg22
+      1 |  san11
+
+(4 rows)
+
+cqlsh:hotel> CREATE TABLE fooditem(foodid  varchar PRIMARY KEY,itemcategory text,name text);
+cqlsh:hotel> describe fooditem;
+
+CREATE TABLE hotel.fooditem (
+    foodid text PRIMARY KEY,
+    itemcategory text,
+    name text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:hotel> INSERT INTO fooditem(foodid,itemcategory,name)VALUES('san11','sancks','frenchfries');
+cqlsh:hotel> INSERT INTO fooditem(foodid,itemcategory,name)VALUES('veg22','icecream','faloda');
+cqlsh:hotel> INSERT INTO fooditem(foodid,itemcategory,name)VALUES('dor33','pizza','lovewithpaneerpizza');
+cqlsh:hotel> INSERT INTO fooditem(foodid,itemcategory,name)VALUES('jui89','juice','lemonjuice');
+cqlsh:hotel> SELECT * FROM fooditem;
+
+ foodid | itemcategory | name
+--------+--------------+---------------------
+  dor33 |        pizza | lovewithpaneerpizza
+  veg22 |     icecream |              faloda
+  san11 |       sancks |         frenchfries
+  jui89 |        juice |          lemonjuice
+
+(4 rows)
+
+cqlsh:hotel> CREATE TABLE payment(custid varchar PRIMARY KEY,orderid varchar,paymenttype text);
+cqlsh:hotel> describe payment;
+
+CREATE TABLE hotel.payment (
+    custid text PRIMARY KEY,
+    orderid text,
+    paymenttype text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:hotel> INSERT INTO payment(custid,orderid,paymenttype)VALUES('100','201','gpay');
+cqlsh:hotel> INSERT INTO payment(custid,orderid,paymenttype)VALUES('101','202','cod');
+cqlsh:hotel> INSERT INTO payment(custid,orderid,paymenttype)VALUES('102','203','paytm');
+cqlsh:hotel> INSERT INTO payment(custid,orderid,paymenttype)VALUES('103','204','gpay');
+cqlsh:hotel> SELECT * FROM payment;
+
+ custid | orderid | paymenttype
+--------+---------+-------------
+    103 |     204 |        gpay
+    102 |     203 |       paytm
+    100 |     201 |        gpay
+    101 |     202 |         cod
+
+(4 rows)
+
+cqlsh:hotel> CREATE TABLE administrator(adminid varchar PRIMARY KEY,name text,username text,password varchar);
+cqlsh:hotel> describe administrator;
+
+CREATE TABLE hotel.administrator (
+    adminid text PRIMARY KEY,
+    name text,
+    password text,
+    username text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:hotel> INSERT INTO administrator(adminid,name,username,password)VALUES('32','gokul','gokul22','gokul123');
+cqlsh:hotel> INSERT INTO administrator(adminid,name,username,password)VALUES('33','mathes','mathes33','mathes345');
+cqlsh:hotel> INSERT INTO administrator(adminid,name,username,password)VALUES('34','kani','kani456','kani789');
+cqlsh:hotel> INSERT INTO administrator(adminid,name,username,password)VALUES('35','suba','suba467','suba103');
+cqlsh:hotel> INSERT INTO administrator(adminid,name,username,password)VALUES('36','ram','ram23','ram4566');
+cqlsh:hotel> SELECT * FROM administrator;
+
+ adminid | name   | password  | username
+---------+--------+-----------+----------
+      32 |  gokul |  gokul123 |  gokul22
+      34 |   kani |   kani789 |  kani456
+      36 |    ram |   ram4566 |    ram23
+      35 |   suba |   suba103 |  suba467
+      33 | mathes | mathes345 | mathes33
+
+(5 rows)
+
+cqlsh:hotel> DELETE FROM administrator WHERE adminid='36';
+
+cqlsh:hotel> UPDATE payment SET paymenttype='cod' WHERE custid='103';
+cqlsh:hotel> UPDATE orders SET quantity='5' WHERE orderid='202';
+
+
+cqlsh:hotel> SELECT * FROM customer;
+
+ custid | custname | email
+--------+----------+------------
+    103 |     devi |   thirupur
+    102 |    sound |      salem
+    100 |      sri |      erode
+    101 |    sandy | perundurai
+
+cqlsh:hotel> SELECT * FROM orders;
+
+ orderid | custid | quantity
+---------+--------+----------
+     202 |    101 |        5
+     204 |    103 |        2
+     201 |    100 |        2
+     203 |    102 |        3
+
+(4 rows)
+cqlsh:hotel> SELECT * FROM menu;
+
+ menuid | foodid
+--------+--------
+      4 |  jui89
+      3 |  dor33
+      2 |  veg22
+      1 |  san11
+
+(4 rows)
+cqlsh:hotel> SELECT * FROM fooditem;
+
+ foodid | itemcategory | name
+--------+--------------+---------------------
+  dor33 |        pizza | lovewithpaneerpizza
+  veg22 |     icecream |              faloda
+  san11 |       sancks |         frenchfries
+  jui89 |        juice |          lemonjuice
+
+(4 rows)
+cqlsh:hotel> SELECT * FROM payment;
+
+ custid | orderid | paymenttype
+--------+---------+-------------
+    103 |     204 |         cod
+    102 |     203 |       paytm
+    100 |     201 |        gpay
+    101 |     202 |         cod
+
+(4 rows)
+cqlsh:hotel> SELECT * FROM administrator;
+
+ adminid | name   | password  | username
+---------+--------+-----------+----------
+      32 |  gokul |  gokul123 |  gokul22
+      34 |   kani |   kani789 |  kani456
+      35 |   suba |   suba103 |  suba467
+      33 | mathes | mathes345 | mathes33
+
+(4 rows)
