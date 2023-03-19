@@ -1,5 +1,5 @@
-
-# RESTAURANT  FOOD ORDERING SYSTEM :
+# CASSANDRA COLUMN FAMILY DATABASE
+RESTAURANT  FOOD ORDERING SYSTEM :
          Restaurant food ordering system is used to automate menu for ordering food in restaurants . In these modern days the number of restaurants are increasing. They also require very fast processing for serving food to the customers. With the increasing number of customers, it would require more man power, since the current situation has become hectic for the restaurants. Also changes in the hardcopy of the menu can’t happen . For these problem ,restaurant food ordering system was proposed.
 CASSANDRA:
 
